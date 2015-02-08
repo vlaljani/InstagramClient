@@ -1,5 +1,9 @@
 package com.codepath.instagramclient;
 
+import org.json.JSONArray;
+
+import java.util.ArrayList;
+
 /**
  * Created by vibhalaljani on 2/4/15.
  */
@@ -10,6 +14,52 @@ public class InstagramPhoto {
     private String imgUrl;
     private String profilePicUrl;
     private long createdAt;
+    private JSONArray tags;
+
+    public int getNumComments() {
+        return numComments;
+    }
+
+    public void setNumComments(int numComments) {
+        this.numComments = numComments;
+    }
+
+    public ArrayList<String> getRecentComments() {
+        return recentComments;
+    }
+
+    public void setRecentComments(ArrayList<String> recentComments) {
+        this.recentComments = recentComments;
+    }
+
+    private String location;
+    private int numComments;
+    private ArrayList<String> recentComments;
+    private ArrayList<String> recentCommenters;
+
+    public ArrayList<String> getRecentCommenters() {
+        return recentCommenters;
+    }
+
+    public void setRecentCommenters(ArrayList<String> recentCommenters) {
+        this.recentCommenters = recentCommenters;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public JSONArray getTags() {
+        return tags;
+    }
+
+    public void setTags(JSONArray tags) {
+        this.tags = tags;
+    }
 
     public long getCreatedAt() {
         return createdAt;

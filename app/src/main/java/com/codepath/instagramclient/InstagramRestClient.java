@@ -10,7 +10,7 @@ import com.loopj.android.http.RequestParams;
 public class InstagramRestClient {
     private static final String BASE_URL = "https://api.instagram.com/v1/";
     private static final String CLIENT_ID = "a2f340751f2b4452a0b5bd499d00abd8";
-    private static final String CLIENT_ID_EXT = "?client_id=" + CLIENT_ID;
+    private static final String CLIENT_ID_EXT = "client_id=" + CLIENT_ID;
 
     private static AsyncHttpClient client = new AsyncHttpClient();
 

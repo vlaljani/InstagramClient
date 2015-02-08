@@ -35,12 +35,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="@color/instagram_blue"
-        android:textStyle="bold"
         android:layout_toRightOf="@+id/ivProfilePic"
         android:layout_alignBottom="@+id/ivProfilePic"
         android:layout_alignTop="@+id/ivProfilePic"
-        android:gravity="center"/>
+        android:gravity="center_vertical"
+        android:textColor="@color/instagram_blue"/>
     
     <ImageView
         android:id="@+id/ivClock"
@@ -90,6 +89,24 @@
         android:layout_below="@+id/tvLikes"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:maxLines="3"
-        android:ellipsize="end"/>
+        android:ellipsize="end"
+        android:paddingBottom="@dimen/activity_horizontal_margin"/>
+    <TextView
+        android:id="@+id/tvViewComments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:layout_below="@+id/tvCaption"
+        android:paddingBottom="@dimen/activity_profile_pic_padding"/>
+    <LinearLayout
+        android:id="@+id/lvComments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/tvViewComments">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></View>
+        </LinearLayout>
 
 </RelativeLayout>
