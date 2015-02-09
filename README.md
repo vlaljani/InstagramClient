@@ -22,5 +22,6 @@ Image from working case for location:
 ![Image from working case for location:](Sample Screenshot for location.png)
 
 Video walkthrough: 
+![Video walkthrough](VideoWalkthroughForInstagramViewer.gif)
  
 
