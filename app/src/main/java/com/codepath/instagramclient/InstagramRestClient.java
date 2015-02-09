@@ -6,6 +6,8 @@ import com.loopj.android.http.RequestParams;
 
 /**
  * Created by vibhalaljani on 2/6/15.
+ *
+ * This is a static client for the Instagram REST API
  */
 public class InstagramRestClient {
     private static final String BASE_URL = "https://api.instagram.com/v1/";

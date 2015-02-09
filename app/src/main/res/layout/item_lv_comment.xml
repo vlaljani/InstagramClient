@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_horizontal_margin">
+    <ImageView
+        android:id="@+id/ivProfilePic"
+        android:layout_width="@dimen/profile_pic_dim"
+        android:layout_height="@dimen/profile_pic_dim"
+        android:paddingLeft="@dimen/activity_profile_pic_padding"
+        android:paddingRight="@dimen/activity_profile_pic_padding"
+        android:paddingTop="@dimen/activity_profile_pic_padding"
+        android:paddingBottom="@dimen/activity_profile_pic_padding"/>
+    <TextView
+        android:id="@+id/tvUsernameAndText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:layout_toRightOf="@+id/ivProfilePic"
+        android:paddingRight="@dimen/activity_vertical_margin"
+        />
+    <TextView
+        android:id="@+id/tvCreatedAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textSize="@dimen/created_font_size"
+        android:layout_below="@+id/tvUsernameAndText"
+        android:layout_toRightOf="@+id/ivProfilePic"/>
+
+</RelativeLayout>

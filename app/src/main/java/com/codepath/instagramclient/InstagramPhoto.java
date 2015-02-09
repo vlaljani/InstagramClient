@@ -2,10 +2,11 @@ package com.codepath.instagramclient;
 
 import org.json.JSONArray;
 
-import java.util.ArrayList;
 
 /**
  * Created by vibhalaljani on 2/4/15.
+ *
+ * This is the model used to hold details about a single Instagram photo.
  */
 public class InstagramPhoto {
     private String type;
@@ -15,6 +16,15 @@ public class InstagramPhoto {
     private String profilePicUrl;
     private long createdAt;
     private JSONArray tags;
+    private JSONArray allComments;
+
+    public JSONArray getAllComments() {
+        return allComments;
+    }
+
+    public void setAllComments(JSONArray allComments) {
+        this.allComments = allComments;
+    }
 
     public int getNumComments() {
         return numComments;
@@ -24,26 +34,11 @@ public class InstagramPhoto {
         this.numComments = numComments;
     }
 
-    public ArrayList<String> getRecentComments() {
-        return recentComments;
-    }
-
-    public void setRecentComments(ArrayList<String> recentComments) {
-        this.recentComments = recentComments;
-    }
 
     private String location;
     private int numComments;
-    private ArrayList<String> recentComments;
-    private ArrayList<String> recentCommenters;
 
-    public ArrayList<String> getRecentCommenters() {
-        return recentCommenters;
-    }
 
-    public void setRecentCommenters(ArrayList<String> recentCommenters) {
-        this.recentCommenters = recentCommenters;
-    }
 
     public String getLocation() {
         return location;

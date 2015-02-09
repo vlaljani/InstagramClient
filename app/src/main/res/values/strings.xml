@@ -7,5 +7,6 @@
     <string name="like_str">likes</string>
     <string name="viewComments1">View all </string>
     <string name="viewComments2"> comments!</string>
+    <string name="comments_title">COMMENTS</string>
 
 </resources>

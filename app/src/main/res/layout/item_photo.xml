@@ -28,6 +28,7 @@
         android:paddingRight="@dimen/activity_profile_pic_padding"
         android:paddingTop="@dimen/activity_profile_pic_padding"
         android:paddingBottom="@dimen/activity_profile_pic_padding"
+        android:scaleType="centerInside"
     />
 
     <TextView

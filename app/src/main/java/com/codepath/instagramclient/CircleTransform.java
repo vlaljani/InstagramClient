@@ -2,6 +2,14 @@ package com.codepath.instagramclient;
 
 /**
  * Created by vibhalaljani on 2/6/15.
+ * Borrowed initially from
+ * http://stackoverflow.com/questions/26112150/android-create-circular-image-with-picasso/26112408#26112408
+ *
+ * This class is used to provide a CircleTransform to use with Picasso, so we can show the profile
+ * picture as a rounded image, rather than a regular square image.
+ *
+ * Added by vlaljani: Code to draw the black border around the circle. Also found on stackoverflow
+ * after some searching.
  */
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;

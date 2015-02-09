@@ -1,15 +1,15 @@
 package com.codepath.instagramclient;
 
+
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
@@ -23,9 +23,9 @@ import java.util.ArrayList;
 public class PhotosActivity extends ActionBarActivity {
 
     private ArrayList<InstagramPhoto> photos;
-
     private InstagramPhotoAdapter aPhotos;
     private ListView lvPhotos;
+
     private SwipeRefreshLayout swipeContainer;
 
     private String location_holder;
@@ -46,6 +46,11 @@ public class PhotosActivity extends ActionBarActivity {
         // Assign the custom ArrayAdapter to the ListView
         lvPhotos.setAdapter(aPhotos);
 
+        // This will help us show all the comments and the full caption in a dialog fragment when
+        // a list item is clicked
+        setupListViewListener();
+
+        // This section of code is used to swipe to refresh
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
 
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -55,14 +60,48 @@ public class PhotosActivity extends ActionBarActivity {
                 fetchPopularPhotos();
             }
         });
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
+        swipeContainer.setColorSchemeResources(R.color.instagram_blue,
+                R.color.location_blue,
+                R.color.instagram_blue,
+                R.color.location_blue);
 
         // Send out API request to popular photos
         fetchPopularPhotos();
 
+    }
+
+    // This will help us show all the comments and the full caption in a dialog fragment when
+    // a list item is clicked
+    private void setupListViewListener() {
+        lvPhotos.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapter,
+                                            View item,
+                                            int pos,
+                                            long id) {
+                           InstagramPhoto curr_photo = photos.get(pos);
+                           showCommentsDialog(curr_photo.getUsername(),
+                                              curr_photo.getCaption(),
+                                              curr_photo.getProfilePicUrl(),
+                                              curr_photo.getCreatedAt(),
+                                              curr_photo.getAllComments());
+                    }
+                });
+    }
+
+    // This will help us show all the comments and the full caption in a dialog fragment when
+    // a list item is clicked
+    private void showCommentsDialog(String username,
+                                    String caption,
+                                    String profilePicUrl,
+                                    Long createdAt,
+                                    JSONArray recentComments) {
+        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+        CommentsDialog allCommentsDialog = CommentsDialog.newInstance(username, caption,
+                                                                      profilePicUrl, createdAt,
+                                                                      recentComments);
+        allCommentsDialog.show(fm, "fragment_all_comments");
     }
 
     // Method to trigger API request for popular photos
@@ -80,7 +119,6 @@ public class PhotosActivity extends ActionBarActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 //Iterate over response and decode each popular photo item into a java object
-                Log.i("Debug", "goes here");
                 JSONArray photosJSON = null;
                 photos.clear();
                 try {
@@ -98,7 +136,7 @@ public class PhotosActivity extends ActionBarActivity {
                                 getJSONObject("standard_resolution").getString("url"));
                         photo.setImgHeight(photoJSON.getJSONObject("images").
                                 getJSONObject("standard_resolution").getInt("height"));
-                        photo.setImgHeight(photoJSON.getJSONObject("images").
+                        photo.setImgWidth(photoJSON.getJSONObject("images").
                                 getJSONObject("standard_resolution").getInt("width"));
                         photo.setType(photoJSON.getString("type"));
                         photo.setLikesCount(photoJSON.getJSONObject("likes").getInt("count"));
@@ -111,6 +149,13 @@ public class PhotosActivity extends ActionBarActivity {
                             photo.setCaption(photoJSON.getJSONObject("caption").getString("text"));
                         }
 
+                        // This was an attempt to get the location. The idea was to get the
+                        // latitude and longitude, and then use a different end point
+                        // locations/search in the function below so it gets the English name loc.
+                        // It worked for some cases. However, it turned out that a lot of photos
+                        // stored the English name directly without latitude and longitude and
+                        // so I had to handle more cases here, which I didn't fully have the time
+                        // for.
                         if (photoJSON.optJSONObject("location") != null) {
                             /*String latitude = photoJSON.getJSONObject("location").
                                     getString("latitude");
@@ -127,18 +172,7 @@ public class PhotosActivity extends ActionBarActivity {
 
                             photo.setNumComments(commentsObj.getInt("count"));
                             JSONArray commentsArr = commentsObj.getJSONArray("data");
-                            int numNowComments = commentsArr.length();
-                            ArrayList<String> comments = new ArrayList<String>();
-                            ArrayList<String> commenters = new ArrayList<String>();
-                            int numCommentsToShow = 2;
-                            for (int j = 0; j < numCommentsToShow; j++) {
-                                comments.add(((JSONObject) commentsArr.get(numNowComments - 1 - j))
-                                        .getString("text"));
-                                commenters.add(((JSONObject) commentsArr.get(numNowComments - 1 - j)).
-                                                       getJSONObject("from").getString("username"));
-                            }
-                            photo.setRecentComments(comments);
-                            photo.setRecentCommenters(commenters);
+                            photo.setAllComments(commentsArr);
                         }
                         photos.add(photo);
 
@@ -164,6 +198,14 @@ public class PhotosActivity extends ActionBarActivity {
 
     }
 
+    // This was an attempt to get the location. The idea was to get the
+    // latitude and longitude above, and then use a different end point
+    // locations/search in the function below so it gets the English name loc.
+    // In this case, it only picked the first possible location.
+    // It worked for some cases. However, it turned out that a lot of photos
+    // stored the English name directly without latitude and longitude and
+    // so I had to handle more cases here, which I didn't fully have the time
+    // for.
     public void getEnglishLocation(String latitude, String longitude) {
         String url = "locations/search?lat=" + latitude + "&lng=" +
                 longitude + "&";
