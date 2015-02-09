@@ -18,6 +18,11 @@ Completed user stories:
  * Attempted to get the location using the locations/search?lat=48.858844&lng=2.294351&client\_id=CLIENT_ID, and it worked for some cases. However, it turned out that some photos stored the English name directly without latitude and longitude and so I had to handle more cases here, which I didn't fully have the time for. (See image from a working case below) 
  * Made the hashtags in the caption blue. Attempted to make the @references blue. However, they were not captured by users\_in_photo or tags. It doesn't cover cases like #beautyPaegent #beauty because beauty is the first part of beautyPaegent, OR if the same tag is used multiple times. Currently, it does not actually linkify the tag, just colors it blue to look like the actual Instagram client.
 
+Libraries that helped make the project easier :-) 
+* [Android async-http](http://loopj.com/android-async-http/) to make calls to the Instagram REST API
+* [Picasso](http://square.github.io/picasso/) to help load the images
+* [RoundedImageView](https://github.com/vinc3m1/RoundedImageView) to get the profile picture in a rounded shape
+
 Image from working case for location: 
 ![Image from working case for location:](Sample Screenshot for location.png)
 
