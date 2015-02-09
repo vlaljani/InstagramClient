@@ -12,7 +12,7 @@ Completed user stories:
  * [x] Advanced + Bonus: Show latest 2 comments for each photo 
  * [x] Advanced: Display each user profile image using a [RoundedImageView](https://github.com/vinc3m1/RoundedImageView)
  * [x] Advanced: Use [Picasso](http://square.github.io/picasso/) for loading photos and display a nice default placeholder graphic for each image during loading 
- * [x] Advanced: Allow user to view all comments for an image within a [dialogFragment](http://guides.codepath.com/android/Using-DialogFragment)
+ * [x] Advanced: Allow user to view all comments for an image within a [dialogFragment](http://guides.codepath.com/android/Using-DialogFragment). The dialog fragment shows comments scrolled all the way to the bottom (like the actual Instagram client). And there's a + icon. It doesn't do anything right now, but theoretically, it would expand to show more comments. 
  
  * Made the images square using Picasso's resize() function using screen\_width, screen_width/aspectRatio
  * Attempted to get the location using the locations/search?lat=48.858844&lng=2.294351&client\_id=CLIENT_ID, and it worked for some cases. However, it turned out that some photos stored the English name directly without latitude and longitude and so I had to handle more cases here, which I didn't fully have the time for. (See image from a working case below) 
