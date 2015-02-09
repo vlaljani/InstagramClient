@@ -14,8 +14,13 @@ Completed user stories:
  * [x] Advanced: Use [Picasso](http://square.github.io/picasso/) for loading photos and display a nice default placeholder graphic for each image during loading 
  * [x] Advanced: Allow user to view all comments for an image within a [dialogFragment](http://guides.codepath.com/android/Using-DialogFragment)
  
- * Made the images square using Picasso's resize() function using screen_width, screen_width/aspectRatio
- * Attempted to get the location using the locations/search?lat=48.858844&lng=2.294351&client_id=CLIENT_ID, and it worked for some cases. However, it turned out that some photos stored the English name directly without latitude and longitude and so I had to handle more cases here, which I didn't fully have the time for. (See image from a working case below) 
- * Made the hashtags in the caption blue. Attempted to make the @references blue. However, they were not captured by users_in_photo or tags. It doesn't cover cases like #beautyPaegent #beauty because beauty is the first part of beautyPaegent, OR if the same tag is used multiple times. Currently, it does not actually linkify the tag, just colors it blue to look like the actual Instagram client.
+ * Made the images square using Picasso's resize() function using screen\_width, screen_width/aspectRatio
+ * Attempted to get the location using the locations/search?lat=48.858844&lng=2.294351&client\_id=CLIENT_ID, and it worked for some cases. However, it turned out that some photos stored the English name directly without latitude and longitude and so I had to handle more cases here, which I didn't fully have the time for. (See image from a working case below) 
+ * Made the hashtags in the caption blue. Attempted to make the @references blue. However, they were not captured by users\_in_photo or tags. It doesn't cover cases like #beautyPaegent #beauty because beauty is the first part of beautyPaegent, OR if the same tag is used multiple times. Currently, it does not actually linkify the tag, just colors it blue to look like the actual Instagram client.
+
+Image from working case for location: 
+![Image from working case for location:](Sample Screenshot for location.png)
+
+Video walkthrough: 
  
 
